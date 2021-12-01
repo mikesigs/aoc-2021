@@ -12,12 +12,9 @@ func Part1() int {
 	var prev int
 	higher := -1
 	for _, curr := range nums {
-		if higher == -1 {
-			higher = 0
-		} else if curr > prev {
+		if curr > prev {
 			higher += 1
 		}
-
 		prev = curr
 	}
 
@@ -29,33 +26,34 @@ func Part2() int {
 
 	var prev int
 	higher := -1
-	for i := range nums {
-		upper := i + 3
-		if upper > len(nums) {
-			upper = len(nums)
-		}
-		s := nums[i:upper]
-
-		curr := sum(s)
-
-		if higher == -1 {
-			higher = 0
-		} else if curr > prev {
+	for i := 0; i <= len(nums)-3; i++ {
+		curr := sum(nums[i : i+3])
+		if curr > prev {
 			higher += 1
 		}
-
 		prev = curr
 	}
-
 	return higher
 }
 
 func sum(nums []int) int {
 	result := 0
-	for _, v := range nums {
-		result += v
+	for _, n := range nums {
+		result += n
 	}
 	return result
+}
+
+func readNums(path string) []int {
+	lines, err := readLines(path)
+	check(err)
+	var nums []int
+	for _, line := range lines {
+		num, err := strconv.Atoi(line)
+		check(err)
+		nums = append(nums, num)
+	}
+	return nums
 }
 
 func readLines(path string) ([]string, error) {
@@ -69,18 +67,6 @@ func readLines(path string) ([]string, error) {
 		lines = append(lines, scanner.Text())
 	}
 	return lines, scanner.Err()
-}
-
-func readNums(path string) []int {
-	lines, err := readLines(path)
-	check(err)
-	var nums []int
-	for _, line := range lines {
-		num, err := strconv.Atoi(line)
-		check(err)
-		nums = append(nums, num)
-	}
-	return nums
 }
 
 func check(e error) {
