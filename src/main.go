@@ -13,5 +13,5 @@ func main() {
 	fmt.Printf("Day 2 | Part 1 | %d\n", day2.Part1())
 	fmt.Printf("Day 2 | Part 2 | %d\n", day2.Part2())
 	fmt.Printf("Day 3 | Part 1 | %d\n", day3.Part1())
-	// fmt.Printf("Day 3 | Part 2 | %d\n", day3.Part2())
+	fmt.Printf("Day 3 | Part 2 | %d\n", day3.Part2())
 }
