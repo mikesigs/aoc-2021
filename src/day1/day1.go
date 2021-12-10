@@ -2,10 +2,13 @@ package day1
 
 import (
 	"mikesigs/aoc-2021/src/shared"
+	"strconv"
 )
 
 func Part1() int {
-	nums := shared.ReadNums("/workspace/aoc-2021/data/day1.txt")
+	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day1.txt")
+	shared.Check(err)
+	nums := readNums(lines)
 
 	var prev int
 	higher := -1
@@ -20,7 +23,9 @@ func Part1() int {
 }
 
 func Part2() int {
-	nums := shared.ReadNums("/workspace/aoc-2021/data/day1.txt")
+	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day1.txt")
+	shared.Check(err)
+	nums := readNums(lines)
 
 	var prev int
 	higher := -1
@@ -32,6 +37,16 @@ func Part2() int {
 		prev = curr
 	}
 	return higher
+}
+
+func readNums(lines []string) []int {
+	var nums []int
+	for _, line := range lines {
+		num, err := strconv.Atoi(line)
+		shared.Check(err)
+		nums = append(nums, num)
+	}
+	return nums
 }
 
 func sum(nums []int) int {
