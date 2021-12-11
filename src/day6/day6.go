@@ -1,7 +1,6 @@
 package day6
 
 import (
-	"fmt"
 	"mikesigs/aoc-2021/src/shared"
 	"strconv"
 	"strings"
@@ -12,53 +11,33 @@ func Part1() int {
 	shared.Check(err)
 	fish := loadFish(lines[0])
 
-	for i := 0; i < 80; i++ {
+	for i := 0; i < 40; i++ {
 		fish = generationA(fish)
 	}
 
 	return len(fish)
 }
 
-type Node struct {
-	next  *Node
-	value int
-}
-
-func Part2() int64 {
+func Part2() int {
 	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day6.txt")
 	shared.Check(err)
-	inputs := strings.Split(lines[0], ",")
-	var list *Node
-	for i := range inputs {
-		n, err := strconv.Atoi(inputs[i])
-		shared.Check(err)
-		node := Node{next: list, value: n}
-		list = &node
+
+	fish := make(map[int]int, 9)
+	for _, d := range loadFish(lines[0]) {
+		fish[d]++
 	}
 
-	generations := 256
-	for generations > 0 {
-		generationL(list)
-		generations--
+	for d := 0; d < 256; d++ {
+		today := d % 9
+		fish[(today+7)%9] += fish[today]
 	}
 
-	var count int64
-	n := list
-	for n != nil {
-		count++
-		n = n.next
+	var sum int
+	for i := range fish {
+		sum += fish[i]
 	}
 
-	return count
-}
-
-func printList(list *Node) {
-	n := list
-	for n != nil {
-		fmt.Printf("%d->", n.value)
-		n = n.next
-	}
-	fmt.Println()
+	return sum
 }
 
 func loadFish(input string) []int {
@@ -83,29 +62,4 @@ func generationA(fish []int) []int {
 		}
 	}
 	return fish
-}
-
-func generationL(list *Node) *Node {
-	var new int
-	n := list
-	for {
-		if n.value == 0 {
-			n.value = 6
-			new++
-		} else {
-			n.value--
-		}
-		if n.next != nil {
-			n = n.next
-		} else {
-			break
-		}
-	}
-	for new > 0 {
-		n.next = &Node{value: 8}
-		n = n.next
-		new--
-	}
-
-	return list
 }
