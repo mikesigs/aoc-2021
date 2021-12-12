@@ -1,0 +1,38 @@
+	"cf":      1,
+	"acf":     7,
+	"bcdf":    4,
+	"acdeg":   2,
+	"acdfg":   3,
+	"abdfg":   5,
+	"abcefg":  0,
+	"abdefg":  6,
+	"abcdfg":  9,
+	"abcdefg": 8,
+
+abcdefg abdf? adc?? acdf? acf abcdf? abdf?? bcdf abcf?? cf abdf? acdf? abdf? acdf?
+c ba df  adfb   adc df ca acf  bdcfa  ad bf bcdf  c baf cf  adbf d caf  adbf  afcd
+acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab cdfeb fcadb cdfeb cdbaf
+
+     ab =      cf = 1 (len 2)
+    dab =     acf = 7 (len 3)
+   eafb =    bcdf = 4 (len 4)
+acedgfb = abcdefg = 8 (len 7)
+  
+For the first one with unknowns "cdfbe" we swap what we know and get ?adfb. Sort the deciphered string get abdf?, with the unknown at the end.
+The only letters not solved for yet are c and g, so the missing letter must be one of those. 
+Starting with "c", we look for "abcdf" and find it does not match a digit. However with "g" we are more lucky because "abdfg" matches #5.
+So the missing letter is "g", which means the input cdfbe = gadfb, i.e. c maps to g.
+
+cdfbe = ?adfb = gadfb = abdfg = 5
+
+a = c
+b = f
+c = ?
+d = a
+e = b
+f = d
+g = ?
+
+acedgfb = c?ba?df
+  cdfbe = ?adfc 
+  gcdfa = ??adc
