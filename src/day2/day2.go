@@ -6,7 +6,7 @@ import (
 )
 
 func Part1() int {
-	directions, err := shared.ReadLines("/workspace/aoc-2021/data/day2.txt")
+	directions, err := shared.ReadLines("day2.txt")
 	shared.Check(err)
 
 	var dir string
@@ -36,7 +36,7 @@ func Part1() int {
 }
 
 func Part2() int {
-	directions, err := shared.ReadLines("/workspace/aoc-2021/data/day2.txt")
+	directions, err := shared.ReadLines("day2.txt")
 	shared.Check(err)
 
 	var dir string

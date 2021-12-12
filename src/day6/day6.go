@@ -2,14 +2,12 @@ package day6
 
 import (
 	"mikesigs/aoc-2021/src/shared"
-	"strconv"
-	"strings"
 )
 
 func Part1() int {
-	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day6.txt")
+	lines, err := shared.ReadLines("day6.txt")
 	shared.Check(err)
-	fish := loadFish(lines[0])
+	fish := shared.SplitInts(lines[0], ",")
 
 	for i := 0; i < 40; i++ {
 		fish = generationA(fish)
@@ -19,11 +17,11 @@ func Part1() int {
 }
 
 func Part2() int {
-	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day6.txt")
+	lines, err := shared.ReadLines("day6.txt")
 	shared.Check(err)
 
 	fish := make(map[int]int, 9)
-	for _, d := range loadFish(lines[0]) {
+	for _, d := range shared.SplitInts(lines[0], ",") {
 		fish[d]++
 	}
 
@@ -38,18 +36,6 @@ func Part2() int {
 	}
 
 	return sum
-}
-
-func loadFish(input string) []int {
-	inputs := strings.Split(input, ",")
-	nums := make([]int, len(inputs))
-	for i, x := range inputs {
-		n, err := strconv.Atoi(x)
-		shared.Check(err)
-		nums[i] = n
-	}
-
-	return nums
 }
 
 func generationA(fish []int) []int {

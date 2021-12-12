@@ -10,7 +10,7 @@ type coord struct {
 }
 
 func Part1() int {
-	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day5.txt")
+	lines, err := shared.ReadLines("day5.txt")
 	shared.Check(err)
 
 	grid := make(map[coord]int)
@@ -68,7 +68,7 @@ func Part1() int {
 }
 
 func Part2() int {
-	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day5.txt")
+	lines, err := shared.ReadLines("day5.txt")
 	shared.Check(err)
 
 	grid := make(map[coord]int)

@@ -6,7 +6,7 @@ import (
 )
 
 func Part1() int64 {
-	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day3.txt")
+	lines, err := shared.ReadLines("day3.txt")
 	shared.Check(err)
 
 	sums := make([]int, len(lines[0]))
@@ -37,7 +37,7 @@ func Part1() int64 {
 }
 
 func Part2() int64 {
-	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day3.txt")
+	lines, err := shared.ReadLines("day3.txt")
 	shared.Check(err)
 
 	o2Rating := filter(lines, func(s []string, i int) byte { mostCommon, _ := getBitCommonalityAtPosition(s, i); return mostCommon })

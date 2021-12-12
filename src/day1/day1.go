@@ -6,7 +6,7 @@ import (
 )
 
 func Part1() int {
-	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day1.txt")
+	lines, err := shared.ReadLines("day1.txt")
 	shared.Check(err)
 	nums := readNums(lines)
 
@@ -23,7 +23,7 @@ func Part1() int {
 }
 
 func Part2() int {
-	lines, err := shared.ReadLines("/workspace/aoc-2021/data/day1.txt")
+	lines, err := shared.ReadLines("day1.txt")
 	shared.Check(err)
 	nums := readNums(lines)
 
