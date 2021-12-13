@@ -8,7 +8,6 @@ import (
 
 type IPattern interface {
 	Subtract(except string) string
-	SetDigit(digit int)
 	Length() int
 }
 
@@ -37,10 +36,6 @@ func (p1 *Pattern) Subtract(p2 *Pattern) *Pattern {
 
 	remaining := strings.Join(regexCache[regex].FindAllString(p1.Signals, -1), "")
 	return NewPattern(remaining)
-}
-
-func (p *Pattern) SetDigit(digit int) {
-	p.Digit = digit
 }
 
 func (p *Pattern) Length() int {

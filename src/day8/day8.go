@@ -49,13 +49,6 @@ func Part2() int {
 			patterns[i] = segment7.NewPattern(p)
 		}
 
-		// Get raw outcomes from line input and map to Pattern types
-		rawOutcomes := strings.Fields(parts[1])
-		outcomes := make([]*segment7.Pattern, numOutcomes)
-		for i, o := range rawOutcomes {
-			outcomes[i] = segment7.NewPattern(o)
-		}
-
 		patterns[0].Digit = 1
 		patterns[1].Digit = 7
 		patterns[2].Digit = 4
@@ -86,8 +79,16 @@ func Part2() int {
 			}
 		}
 
-		printPatterns("Patterns", patterns)
+		// printPatterns("Patterns", patterns)
 
+		// Get raw outcomes from line input and map to Pattern types
+		rawOutcomes := strings.Fields(parts[1])
+		outcomes := make([]*segment7.Pattern, numOutcomes)
+		for i, o := range rawOutcomes {
+			outcomes[i] = segment7.NewPattern(o)
+		}
+
+		// Match outcomes to deciphered digit patterns
 		for _, o := range outcomes {
 			for _, p := range patterns {
 				if o.Signals == p.Signals {
@@ -96,13 +97,16 @@ func Part2() int {
 			}
 		}
 
-		printPatterns("Outcomes", outcomes)
+		// printPatterns("Outcomes", outcomes)
 
+		// Get 4-digit output value
 		var value int
 		for i := 0; i < len(outcomes); i++ {
 			value += outcomes[i].Digit * pow(10, len(outcomes)-i-1)
 		}
-		fmt.Println("Output", value)
+		// fmt.Println("Output", value)
+
+		// Increment solution
 		result += value
 	}
 
