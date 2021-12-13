@@ -7,12 +7,14 @@ import (
 )
 
 type IPattern interface {
-	NonMatchingSignalCount(except string) string
+	Subtract(except string) string
 	SetDigit(digit int)
+	Length() int
 }
 
 type Pattern struct {
-	Signals       string
+	Signals string
+	Digit   int
 }
 
 var regexCache = map[string]*regexp.Regexp{}
@@ -27,8 +29,26 @@ func (p *Pattern) NonMatchingSignalCount(except string) int {
 
 }
 
-func NewPattern(pattern string) Pattern {
-	return Pattern{Signals: sortString(pattern)}
+func (p1 *Pattern) Subtract(p2 *Pattern) *Pattern {
+	regex := fmt.Sprintf("[^%s]", p2.Signals)
+	if _, exists := regexCache[regex]; !exists {
+		regexCache[regex] = regexp.MustCompile(regex)
+	}
+
+	remaining := strings.Join(regexCache[regex].FindAllString(p1.Signals, -1), "")
+	return NewPattern(remaining)
+}
+
+func (p *Pattern) SetDigit(digit int) {
+	p.Digit = digit
+}
+
+func (p *Pattern) Length() int {
+	return len(p.Signals)
+}
+
+func NewPattern(pattern string) *Pattern {
+	return &Pattern{Signals: sortString(pattern), Digit: -1}
 }
 
 func sortString(input string) string {
