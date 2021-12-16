@@ -10,6 +10,7 @@ import (
 	"mikesigs/aoc-2021/src/day6"
 	"mikesigs/aoc-2021/src/day7"
 	"mikesigs/aoc-2021/src/day8"
+	"mikesigs/aoc-2021/src/day9"
 )
 
 func main() {
@@ -29,4 +30,5 @@ func main() {
 	fmt.Printf("Day 7 | Part 2 | %d\n", day7.Part2())
 	fmt.Printf("Day 8 | Part 1 | %d\n", day8.Part1())
 	fmt.Printf("Day 8 | Part 2 | %d\n", day8.Part2())
+	fmt.Printf("Day 9 | Part 1 | %d\n", day9.Part1())
 }
