@@ -20,7 +20,19 @@ func Part2() int {
 
 	grid := grid.NewGrid(lines)
 	grid.DefineBasins()
-	// grid.PrintBasinMap()
+	grid.PrintBasinMap()
 
 	return grid.ProductOfThreeLargestBasins()
 }
+
+
+/*Actually, all the closures and functions I had there weren't necessary. After I refactored it all into a "class" it became
+```func (p *Point) SetBasin(basin int) {
+	if p != nil && p.Value != 9 && p.Basin == UndefinedBasin {
+		p.Basin = basin
+		p.Left.SetBasin(basin)
+		p.Right.SetBasin(basin)
+		p.Up.SetBasin(basin)
+		p.Down.SetBasin(basin)
+	}
+}```*/

@@ -11,7 +11,7 @@ const (
 )
 
 type IPoint interface {
-	TraverseBasin(basin int)
+	SetBasin(basin int)
 	String()
 }
 
@@ -25,23 +25,14 @@ func NewPoint(value int) *Point {
 	return &Point{Value: value, Basin: UndefinedBasin}
 }
 
-func (p *Point) TraverseBasin(basin int) {
-	var traverse func(*Point, int)
-
-	traverse = func(p *Point, basin int) {
-		setBasin := func(p *Point, basin int) {
-			if p != nil && p.Value != 9 && p.Basin == UndefinedBasin {
-				p.Basin = basin
-				traverse(p, basin)
-			}
-		}
-		setBasin(p.Left, basin)
-		setBasin(p.Right, basin)
-		setBasin(p.Up, basin)
-		setBasin(p.Down, basin)
+func (p *Point) SetBasin(basin int) {
+	if p != nil && p.Value != 9 && p.Basin == UndefinedBasin {
+		p.Basin = basin
+		p.Left.SetBasin(basin)
+		p.Right.SetBasin(basin)
+		p.Up.SetBasin(basin)
+		p.Down.SetBasin(basin)
 	}
-
-	traverse(p, basin)
 }
 
 func (p *Point) String() string {
@@ -125,7 +116,7 @@ func (g *Grid) DefineBasins() {
 		for x := range g.grid[y] {
 			p := &g.grid[y][x]
 			if p.Value != 9 && p.Basin == UndefinedBasin {
-				p.TraverseBasin(basin)
+				p.SetBasin(basin)
 				basin++
 			}
 		}
